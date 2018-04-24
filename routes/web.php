@@ -168,3 +168,5 @@ Route::post('/updateProfilePicture','AdminController@updateProfilePicture')->mid
 Route::post('/updateProfile','AdminController@updateProfile')->middleware(SessionCheck::class);
 
 Route::get('/updateProfile','AdminController@viewUpdateData')->middleware(SessionCheck::class);
+
+Route::get('/userProfilePic','UserController@updateUserProfile')->middleware(SessionCheck::class);

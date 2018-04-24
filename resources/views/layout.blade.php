@@ -225,7 +225,7 @@
                   {{ session('Cdata')->user->fname }}
               </a>
               <div class="dropdown-menu" aria-labelledby="userDropdown">
-                  <img src="/uploads/profiles/{{ session('Cdata')->user->profile_pic }}" alt="profile_pic" style="width: 80px; height:80px; position: center; border-radius: 50%; margin-left: 50px; margin-top: 10px;">
+                  <img src="" alt="profile_pic" id="profile_pic" style="width: 80px; height:80px; position: center; border-radius: 50%; margin-left: 50px; margin-top: 10px;">
                   <p style="text-align: center; margin-top: 10px;"><strong>{{ session('Cdata')->user->name }}</strong>
                       <br/>
                       @if(session('Cdata')->user->role_id == 1)
@@ -429,35 +429,26 @@
           }
       }
 
+      $(document).ready(function () {
+          getProfileUrl();
+      });
+
       function getProfileUrl() {
-          var token = 'Bearer {{ session('Cdata')->uid }}';
-          var user_id ='{{ session ('Cdata')->user->userid }}';
-          alert("save data run");
              $.ajax({
-                 method: 'POST',
-                 url: "http://kinna.000webhostapp.com/api/v1/userProfilePic",
-                 headers: {
-                     'Authorization': token,
-                     'Accept': 'application/json',
-                     'Content-type': 'application/json'
-                 },
-                 crossDomain:true,
-                 dataType: 'JSONP',
-                 data: {
-                     "user_id": user_id
-                 },
+                 url: '/userProfilePic',
                  success: function (data) {
-                     alert(data);
+                     setProfilePic(data.profile_pic);
                  },
                  error: function (jqXHR, textStatus, errorThrown) {
-                     alert("Save Data Error");
+                     console.log("Save Data Error");
                  }
           });
       }
 
-      $(document).ready(function () {
-          getProfileUrl();
-      });
+      function setProfilePic(profilePic){
+          var url = 'uploads/profiles/'+profilePic;
+          $('#profile_pic').attr('src',url);
+      }
 
   </script>
 </body>
