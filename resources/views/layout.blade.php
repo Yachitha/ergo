@@ -341,7 +341,7 @@
       var database = firebase.database();
       var myId = '{{ session ('Cdata')->user->userid }}';
 
-      database.ref().child("notifications").child("projects").child(myId).on("value",function (snapshot) {
+      database.ref().child("notifications").child("projects").child(myId).on("child_added",function (snapshot) {
           if(snapshot.val()) {
               renderUI(snapshot.val());
           }
@@ -353,18 +353,18 @@
           var notifications = $("#notifications");
           var existingNotifications = notifications.html();
           var keys = Object.keys(value);
-          for(var i=0; i<keys.length;i++){
+          //for(var i=0; i<keys.length;i++){
               // noinspection JSAnnotator
               var newNotificationHtml = `
             <a class="dropdown-item" href="#">
                     <span class="text-success">
                         <strong><i class="fa fa-shopping-bag fa-fw" style="margin-right: 10px;"></i>Allocated to new project</strong>
                     </span>
-                    <div class="dropdown-message small">`+value[keys[i]].senderName+` allocated you to the project<br>`+value[keys[i]].projectName+`</div>
-                    <span class="small float-right text-muted">`+value[keys[i]].time+`</span>
+                    <div class="dropdown-message small">`+value.senderName+` allocated you to the project<br> `+value.projectName+`</div>
+                    <span class="small float-right text-muted">`+value.time+`</span>
             </a>
           `;
-          }
+          //}
           notifications.html(newNotificationHtml + existingNotifications);
       }
 
@@ -410,7 +410,7 @@
                 senderName: "<?php echo session ('Cdata')->user->fname; ?>",
                 description: "you have assigned to a new project",
                 projectName: projectName,
-                time: Date.now()
+                time: new Date()
             });
       }
 
