@@ -369,6 +369,7 @@
       }
 
       database.ref().child("notifications").child("projects").child(myId).on("child_added",function (snap) {
+          var key = snap.key;
           if (snap.val().seen == false){
               if (!("Notification" in window)){
                   alert("This browser does not support for push notifications!");
@@ -381,6 +382,7 @@
                       icon: '/img/img21.png',
                       sound: audio.play()
                   });
+                  updateNotification(myId,key);
               }else if(Notification.permission !== "denied"){
                   Notification.requestPermission(function (permission) {
                      if(permission === "granted") {
@@ -393,13 +395,14 @@
                          });
                      }
                   });
+                  updateNotification(myId,key);
               }
           }
       });
 
-      function updateNotification(id) {
-          database.ref().child("notifications").child("projects").child(id).update({
-              seen: true
+      function updateNotification(id,key) {
+          database.ref().child("notifications").child("projects").child(id).child(key).update({
+               seen: true
           });
       }
 
@@ -410,7 +413,7 @@
                 senderName: "<?php echo session ('Cdata')->user->fname; ?>",
                 description: "you have assigned to a new project",
                 projectName: projectName,
-                time: new Date()
+                time: '{{ Carbon\Carbon::now ()->format ('h:m:s') }}'
             });
       }
 
