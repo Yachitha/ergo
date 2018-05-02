@@ -17,72 +17,36 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-// Route::get('/landing', function () {
-//     return view('landing');
-// });
-
-/*Route::get('/addmember',function(){
-	return view('addmember');
-});*/
-/*Route::get('/getdata','GuzzleController@getRemoteData');
-Route::get('editprofile',function(){
-	return view('profile');
-});
-*/
 Route::get('/getdata1', function () {
    return view('getdata1');
 });
-
-//Route::post('/addmember', 'AdminController@getLoginData');
-
-// routes in saras part 
-// Route::get('/viewProjects', function () {
-//     return view('viewProjects');
-// });
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/register', function () {
     return view('register');
 });
-
 Route::get('/login', function () {
     return view('login');
 });
-
 Route::get('/forgotPassword', function () {
     return view('forgotPassword');
 });
-
 Route::get('/connectionError', function () {
     return view('errors/connectionError');
 });
-
 Route::get('/clientError', function () {
     return view('errors/clientError');
 });
-
 Route::get('/serverError', function () {
     return view('errors/serverError');
 });
-// Route::get('/viewmember', function () {
-//     return view('viewmember');
-// });
-
-// Route::get('/createProjects', function () {
-//     return view('createProjects');
-// });
-
+Route::get ('/adminDashboard',function (){
+   return view ('admin.adminDashboard');
+});
 Route::get('/profile', function () {
     return view('profile');
 });
-
 Route::get('/events', function () {
     return view('events');
 });
-
 Route::get('/milestones', function () {
     return view('milestones');
 });
@@ -90,14 +54,9 @@ Route::get('/milestones', function () {
 Route::get('/tasks', function () {
     return view('tasks');
 });
-
 Route::get('/projects', function () {
     return view('projects');
 });
-// Route::get('/addmember', function () {
-//     return view('addmember');
-// });
-
 //user routes
 
 Route::get('/dashboard', 'ChartController@getAdminData')->middleware(SessionCheck::class);
@@ -124,32 +83,20 @@ Route::get('/logout','LogoutController@logout');
 Route::post('/submitProjects','projectController@getProjectData')->middleware(SessionCheck::class);
 
 Route::get('/createProjects','projectController@createProject')->middleware(SessionCheck::class);
-// Route::get('/createProjects', function () {
-//     return view('createProjects');
-// })->middleware(SessionCheck::class);
 
 Route::get('viewProjects','projectController@viewProjects')->middleware(SessionCheck::class);
-// Route::get('/viewProjects',function(){
-//     return view('viewProjects');
-// });
+
 Route::post('viewProject','projectController@viewProject')->middleware(SessionCheck::class);
 
 
 // task routes
 Route::post('/createTasks','TaskController@createTasks')->middleware(SessionCheck::class);
-// Route::get('/createTasks', function () {
-//     return view('createTasks');
-// });
 
 Route::post('/submitTask','TaskController@getTaskData')->middleware(SessionCheck::class);
 
 Route::post('/viewAllTasks','TaskController@viewAllTasks')->middleware(SessionCheck::class);
 
 Route::get('/viewTasks','TaskController@viewMyTask')->middleware(SessionCheck::class);
-
-// Route::get('/viewTasks',function(){
-//     return view('viewTasks');
-// });
 
 //event routes
 
@@ -170,3 +117,7 @@ Route::post('/updateProfile','AdminController@updateProfile')->middleware(Sessio
 Route::get('/updateProfile','AdminController@viewUpdateData')->middleware(SessionCheck::class);
 
 Route::get('/userProfilePic','UserController@updateUserProfile')->middleware(SessionCheck::class);
+
+Route::get ('/developerDashboard','DeveloperDashboardController@developerData')->middleware(SessionCheck::class);
+
+Route::get ('/pmDashboard','PMDashboardController@getPMData')->middleware(SessionCheck::class);

@@ -181,11 +181,11 @@
                     <form id="ajax-login-form" style="width: 200px" action="/adminLogin" method="post" role="form" autocomplete="on">
                       <div class="form-group">
                         <label for="username">E-mail</label>
-                        <input type="text" name="email" id="email" tabindex="1" class="form-control" placeholder="E-mail" value="" autocomplete="off">
+                        <input type="text" name="email" id="email" tabindex="1" class="form-control" placeholder="E-mail" value="" autocomplete="off" required>
                       </div>
                       <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" autocomplete="off">
+                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" autocomplete="off" required>
                       </div>
                       <div class="form-group">
                             <input type="checkbox" tabindex="3" name="remember" id="remember">

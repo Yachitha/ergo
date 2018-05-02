@@ -6,12 +6,6 @@ use GuzzleHttp\Exception\ClientException;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Intervention\Image\Facades\Image;
-use Session;
-use App\Http\Controllers\mailConroller;
-use Mail;
-//use Illuminate\Support\Facades\Storage;
-
-use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ConnectException;
 
@@ -88,8 +82,15 @@ class AdminController extends Controller
             //error catching
             //dd ($Cdata);
             $error = $Cdata->error;
+            $role_id = $Cdata->user->role_id;
             session(['Cdata' =>$Cdata]);
             if($error==false){
+                if($role_id == 3){
+                    return redirect ('pmDashboard');
+                }
+                if($role_id == 4){
+                    return redirect ('developerDashboard');
+                }
                 return redirect('/dashboard');
             }else{
                 $error_code=$Cdata->error_code;

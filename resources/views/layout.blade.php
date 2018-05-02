@@ -20,6 +20,8 @@
   <!-- Custom styles for this template-->
   <link href="{{URL::to('/')}}/startbootstrap-sb-admin-gh-pages/css/sb-admin.css" rel="stylesheet">
 
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
 
     <!-- imported for nav tab-->
@@ -28,7 +30,6 @@
   src="https://code.jquery.com/jquery-3.3.1.js"
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   crossorigin="anonymous"></script>
-  <link href="multiple-select.css" rel="stylesheet"/>
   <script
   src="https://code.jquery.com/jquery-2.2.4.js"
   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
@@ -39,7 +40,7 @@
   crossorigin="anonymous"></script>
    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"> -->
-
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
    <script type="text/javascript">
 
   function checkForm(form)
@@ -108,7 +109,15 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="/dashboard">
+          @if(session ('Cdata')->user->role_id == 1)
+            <a class="nav-link" href="/ceoDashboard">
+          @elseif(session ('Cdata')->user->role_id == 2)
+            <a class="nav-link" href="/adminDashboard">
+          @elseif(session ('Cdata')->user->role_id == 3)
+            <a class="nav-link" href="/pmDashboard">
+          @else
+            <a class="nav-link" href="/developerDashboard">
+          @endif
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Dashboard</span>
           </a>
@@ -292,6 +301,7 @@
         </div>
       </div>
     </div>
+    {{--<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>--}}
     <!-- Bootstrap core JavaScript-->
     <script src="{{URL::to('/')}}/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
     <script src="{{URL::to('/')}}/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -299,17 +309,21 @@
     <script src="{{URL::to('/')}}/startbootstrap-sb-admin-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
     <!-- Page level plugin JavaScript-->
     <script src="{{URL::to('/')}}/startbootstrap-sb-admin-gh-pages/vendor/chart.js/Chart.min.js"></script>
+
     <script src="{{URL::to('/')}}/startbootstrap-sb-admin-gh-pages/vendor/datatables/jquery.dataTables.js"></script>
     <script src="{{URL::to('/')}}/startbootstrap-sb-admin-gh-pages/vendor/datatables/dataTables.bootstrap4.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="{{URL::to('/')}}/startbootstrap-sb-admin-gh-pages/js/sb-admin.min.js"></script>
     <!-- Custom scripts for this page-->
-    <script src="{{URL::to('/')}}/startbootstrap-sb-admin-gh-pages/js/sb-admin-datatables.min.js"></script>
-    <script src="{{URL::to('/')}}/startbootstrap-sb-admin-gh-pages/js/sb-admin-charts.min.js"></script>
+    {{--<script src="{{URL::to('/')}}/startbootstrap-sb-admin-gh-pages/js/sb-admin-datatables.min.js"></script>--}}
+    {{--<script src="{{URL::to('/')}}/startbootstrap-sb-admin-gh-pages/js/sb-admin-charts.min.js"></script>--}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
+
   </div>
   <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
   <script>
@@ -413,7 +427,7 @@
                 senderName: "<?php echo session ('Cdata')->user->fname; ?>",
                 description: "you have assigned to a new project",
                 projectName: projectName,
-                time: '{{ Carbon\Carbon::now ()->format ('h:m:s') }}'
+                time: '{{ Carbon\Carbon::now ()->format ('H:m:s') }}'
             });
       }
 
@@ -452,7 +466,6 @@
           var url = 'uploads/profiles/'+profilePic;
           $('#profile_pic').attr('src',url);
       }
-
   </script>
 </body>
 
