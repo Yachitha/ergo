@@ -85,13 +85,15 @@ class AdminController extends Controller
             $role_id = $Cdata->user->role_id;
             session(['Cdata' =>$Cdata]);
             if($error==false){
+                if ($role_id == 1){
+                    return redirect ('ceoDashboard');
+                }
                 if($role_id == 3){
                     return redirect ('pmDashboard');
                 }
                 if($role_id == 4){
                     return redirect ('developerDashboard');
                 }
-                return redirect('/dashboard');
             }else{
                 $error_code=$Cdata->error_code;
                 return view('/landing',compact('error_code'));

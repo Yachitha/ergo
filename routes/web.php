@@ -121,3 +121,5 @@ Route::get('/userProfilePic','UserController@updateUserProfile')->middleware(Ses
 Route::get ('/developerDashboard','DeveloperDashboardController@developerData')->middleware(SessionCheck::class);
 
 Route::get ('/pmDashboard','PMDashboardController@getPMData')->middleware(SessionCheck::class);
+
+Route::get ('/ceoDashboard','CEODashboardController@getCEOData')->middleware(SessionCheck::class);
