@@ -466,6 +466,24 @@
           var url = 'uploads/profiles/'+profilePic;
           $('#profile_pic').attr('src',url);
       }
+
+      function projectUpdate(id,name, description, start_date, end_date) {
+          $("#project_edit").show();
+          $("html, body").animate({ scrollTop: 0 }, "slow");
+          $("#project_id").attr('value',id);
+          $("#extend_id").attr('value',id);
+          $("#project_name").attr('placeholder',name);
+          $("#project_description").attr('placeholder',description);
+          $("#endDate").attr('placeholder',end_date);
+          $("#extended_date").hide();
+          $("#continue_btn").hide();
+          $("#session_id").hide();
+      }
+
+      $("#extend_request").click(function () {
+          $("#extended_date").fadeIn();
+          $("#continue_btn").fadeIn();
+      });
   </script>
 </body>
 

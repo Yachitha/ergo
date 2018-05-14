@@ -95,13 +95,13 @@
                                         $j=0
                                     @endphp
                                     @foreach($Cdata as $data)
-                                    <tr id="row_id">
-                                        <th scope="row">{{ ++$j }}</th>
-                                        <td>{{ $data->name }}</td>
-                                        <td>{{ $data->start_date }}</td>
-                                        <td>{{ $data->end_date }}</td>
-                                        <td><button class="btn btn-sm" onclick="projectUpdate( '{{ $data->id }}' , '{{ $data->name }}', '{{ $data->description }}', '{{ $data->start_date }}', '{{ $data->end_date }}' )"><i class="fa fa-pencil-square-o"></i></button></td>
-                                    </tr>
+                                        <tr id="row_id">
+                                            <th scope="row">{{ ++$j }}</th>
+                                            <td>{{ $data->name }}</td>
+                                            <td>{{ $data->start_date }}</td>
+                                            <td>{{ $data->end_date }}</td>
+                                            <td><button class="btn btn-sm" onclick="projectUpdate( '{{ $data->id }}' , '{{ $data->name }}', '{{ $data->description }}', '{{ $data->start_date }}', '{{ $data->end_date }}' )"><i class="fa fa-pencil-square-o"></i></button></td>
+                                        </tr>
                                     @endforeach
                                     </tbody>
                                 </table>

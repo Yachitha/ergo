@@ -122,7 +122,7 @@ class projectController extends Controller
     public function deleteProject(Request $request){
          try{
              $projectId = $request->input ('project_id');
-             dd ($projectId);
+             //dd ($projectId);
              $client = new Client([
                  'headers'=>['Accept'=>'application/json','Authorization'=>'Bearer '.session ('Cdata')->uid]
              ]);
@@ -135,7 +135,7 @@ class projectController extends Controller
 
              $data = $response->getBody ();
              $Cdata = json_decode ($data);
-             dd ($Cdata);
+             //dd ($Cdata);
              if($Cdata->error == false){
                  return redirect ('/dashboard');
              }else{
@@ -148,8 +148,111 @@ class projectController extends Controller
          }catch (ServerException $se){
              return redirect ('/serverError');
          }
+    }
 
+    public function editProjects(){
+         try{
+             $token = session('Cdata')->uid;
+             $company_id = session('Cdata')->user->company_id;
+             $client = new Client([
+                 'headers' => ['Accept'=>'application/json',
+                     'Authorization'=>'Bearer '. $token
+                 ]
+             ]);
 
+             $response = $client->request('POST','http://kinna.000webhostapp.com/api/v1/companyProjects',[
+                 'form_params'=> [
+                     'company_id'=>$company_id,
+                 ]
+             ]);
 
+             $data= $response->getBody();
+             $Cdata= json_decode($data);
+
+             //dd($Cdata) ;
+             return view('/Projects.editProjects',compact('Cdata'));
+
+        }catch(ClientException $ce){
+            return redirect ('/clientError');
+        }catch (ConnectException $c){
+            return redirect ('/connectionError');
+        }catch (ServerException $se){
+            return redirect ('/serverError');
+        }
+    }
+
+    public function saveEditProject(Request $request){
+         try{
+             $id = $request->input ('project_id');
+             $name = $request->input ('name');
+             $description = $request->input ('description');
+             $token = session ('Cdata')->uid;
+
+             $client = new Client([
+                 'headers'=>[
+                     'Accept'=>'application/json',
+                     'Authorization'=>'Bearer '.$token
+                 ]
+             ]);
+
+             $response = $client->request ('POST','http://kinna.000webhostapp.com/api/v1/saveEditProject',[
+                 'form_params'=>[
+                     'id'=>$id,
+                     'name'=>$name,
+                     'description'=>$description
+                 ]
+             ]);
+
+             $data = $response->getBody ();
+             $Cdata = json_decode ($data);
+             if(!$Cdata->error) {
+                 return redirect ( '/editProjects' )->with ('status','Project Updated!');
+             }
+
+         }catch (ClientException $ce){
+             return redirect ('/clientError');
+         }catch (ConnectException $e){
+             return redirect ('/connectionError');
+         }catch (ServerException $se){
+             return redirect ('/serverError');
+         }
+    }
+
+    public function extendDeadline(Request $request){
+         try{
+             $id = $request->input ('project_id');
+             $end_date = $request->input ('extended_date');
+             $token = session ('Cdata')->uid;
+
+             $client = new Client([
+                 'headers'=>[
+                     'Accept'=>'application/json',
+                     'Authorization'=>'Bearer '.$token
+                 ]
+             ]);
+
+             $response = $client->request ('POST','http://kinna.000webhostapp.com/api/v1/extendDeadline',[
+                 'form_params'=>[
+                     'id'=>$id,
+                     'end_date'=>$end_date
+                 ]
+             ]);
+
+             $data = $response->getBody ();
+             $Cdata = json_decode ($data);
+             //dd($Cdata);
+             if(!$Cdata->error) {
+                 return redirect ( '/editProjects' )->with ('status',$Cdata->message);
+             }else{
+                 return redirect ('/editProjects')->with('error',$Cdata->message);
+             }
+
+         }catch (ClientException $ce){
+             return redirect ('/clientError');
+         }catch (ConnectException $e){
+             return redirect ('/connectionError');
+         }catch (ServerException $se){
+             return redirect ('/serverError');
+         }
     }
 }

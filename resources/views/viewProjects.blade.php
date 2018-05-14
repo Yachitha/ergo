@@ -61,31 +61,6 @@
           }
           ?>
           </div>
-
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="card" style="margin-left:5px">
-                <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <form method="post">
-                    <button type="submit" name="id" class="btn btn-primary" value=""></button>
-                  </form>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
       </div>
     </div>

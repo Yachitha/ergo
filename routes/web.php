@@ -38,9 +38,6 @@ Route::get('/clientError', function () {
 Route::get('/serverError', function () {
     return view('errors/serverError');
 });
-Route::get ('/adminDashboard',function (){
-   return view ('admin.adminDashboard');
-});
 Route::get('/profile', function () {
     return view('profile');
 });
@@ -123,3 +120,11 @@ Route::get ('/developerDashboard','DeveloperDashboardController@developerData')-
 Route::get ('/pmDashboard','PMDashboardController@getPMData')->middleware(SessionCheck::class);
 
 Route::get ('/ceoDashboard','CEODashboardController@getCEOData')->middleware(SessionCheck::class);
+
+Route::get ('/adminDashboard','AdminDashboardController@getAdminData')->middleware(SessionCheck::class);
+
+Route::get ('/editProjects','projectController@editProjects')->middleware(SessionCheck::class);
+
+Route::post ('/saveEditProject','ProjectController@saveEditProject')->middleware(SessionCheck::class);
+
+Route::post ('/extendDeadline','ProjectController@extendDeadline')->middleware(SessionCheck::class);

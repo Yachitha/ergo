@@ -7,14 +7,21 @@
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="/ssindex">Dashboard</a>
+          @if(session ('Cdata')->user->role_id == 1)
+                        <a href="/ceoDashboard">Dashboard</a>
+                    @elseif(session ('Cdata')->user->role_id == 2)
+                        <a href="/adminDashboard">Dashboard</a>
+                    @elseif(session ('Cdata')->user->role_id == 3)
+                        <a href="/pmDashboard">Dashboard</a>
+                    @else
+                        <a href="/developerDashboard">Dashboard</a>
+          @endif
         </li>
         <li class="breadcrumb-item active">Tasks</li>
       </ol>
       <div class="row">
         <div class="col-12"> 
           <h1>Tasks</h1>
-          <p>This is an example of a blank page that you can use as a starting point for creating new ones.</p>
           <hr>
           <div class="container">
 
@@ -42,22 +49,6 @@
                       echo "</p></div> </div>";
                     }
                     ?>
-               <!--  <h5 class="card-title">Card title</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div> -->
-
-            <!-- extra div-->
-            <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
             </div>
           </div>
 
