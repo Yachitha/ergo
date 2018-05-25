@@ -37,4 +37,4 @@ by this command all the **PHP** dependencies will downloaded to the project
 You can use this system to more developments.
 
 ### License
-This project licensed under MIT License
+This project licensed under [MIT License](LICENSE).
