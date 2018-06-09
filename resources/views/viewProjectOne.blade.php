@@ -17,19 +17,20 @@
                         <a href="/developerDashboard">Dashboard</a>
           @endif
         </li>
-        <li class="breadcrumb-item active">Tasks</li>
+        <li class="breadcrumb-item active">Project</li>
       </ol>
       <div class="container">
           <div class="row">
               <div class="col-lg-12">
-                  <div class="card text-center">
+                  <div class="card text-center" style="border-top: 4px solid #b28bff;">
                     <div class="card-header">
                       Project ID : {{ $Cdata->project->id }} 
                     </div>
                     <div class="card-body">
                       <h5 class="card-title">{{ $Cdata->project->name }}</h5>
-                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                      <p class="card-text">{{ $Cdata->project->description }}</p>
+                      <a href="#" class="btn btn-outline-primary">more</a>
+                      <a href="/viewProjects" class="btn btn-outline-primary">back</a>
                     </div>
                     <div class="card-footer text-muted">
                       <?php
@@ -41,22 +42,33 @@
                       ?>
                     </div>
                   </div>
-                  <div class="card" style="width: 20rem; margin-top: 10px; margin-left:2px ">
-                    <div class="card-header">
-                      Project team members
-                    </div>
-                    <ul class="list-group list-group-flush">
-                    <?php
-                      $teamMembers= $Cdata->teamMembers;
-                      foreach ($teamMembers as $key) {
-                      echo "<li class=\"list-group-item\">";
-                      echo $key->fname." ".$key->lname;
-                      echo "</li>";
-                      }
-                    ?>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                    </ul>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-8">
+                  <div class="card bg-light" style="border-top: 4px solid #b28bff; margin-top: 10px; margin-left:auto">
+                      <div class="card-body">
+                          skdfsdjgp
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="card bg-light" style="border-top: 4px solid #b28bff; width: 20rem; margin-top: 10px; margin-left:auto ">
+                      <div class="card-header">
+                          Project team members
+                      </div>
+                      <ul class="list-group list-group-flush">
+                          @if($Cdata->teamMembers)
+                              @foreach($Cdata->teamMembers as $member)
+                                  <li class="list-group-item">{{ $member->fname." ". $member->lname }}</li>
+                              @endforeach
+                          @else
+                              <li class="list-group-item">Not assigned</li>
+                          @endif
+                      </ul>
+                  </div>
+                  <div >
+
                   </div>
               </div>
           </div>
