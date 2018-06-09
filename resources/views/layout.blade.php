@@ -234,7 +234,9 @@
                   {{ session('Cdata')->user->fname }}
               </a>
               <div class="dropdown-menu" aria-labelledby="userDropdown">
-                  <img src="" alt="profile_pic" id="profile_pic" style="width: 80px; height:80px; position: center; border-radius: 50%; margin-left: 50px; margin-top: 10px;">
+                  <div class="text-center">
+                      <img src="" alt="profile_pic" id="profile_pic" style="width: 80px; height:80px; border-radius: 50%;">
+                  </div>
                   <p style="text-align: center; margin-top: 10px;"><strong>{{ session('Cdata')->user->name }}</strong>
                       <br/>
                       @if(session('Cdata')->user->role_id == 1)
