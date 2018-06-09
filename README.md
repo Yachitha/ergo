@@ -32,3 +32,9 @@ by this command all the **PHP** dependencies will downloaded to the project
 * To generate a key to the project use following command:
 
 `php artisan key:generate`
+
+### Usage
+You can use this system to more developments.
+
+### License
+This project licensed under [MIT License](LICENSE).
