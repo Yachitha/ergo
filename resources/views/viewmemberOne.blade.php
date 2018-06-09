@@ -23,7 +23,9 @@
                     <div class="container">
                         <div class="row">
                             <div class="card border-info mb-5" style="width: 20rem; margin-bottom:10px; " >
-                                <img class="card-img-top" src="\uploads\profiles\{{ $Cdata -> profile_pic}}" alt="Card image cap">
+                                <div class="card-header text-center">
+                                    <img src={{ url('/') }}/uploads/profiles/{{ $Cdata->profile_pic }} alt="profile_picture" style="width: 200px; height:200px; position: center; border-radius: 50%; margin-top: 10px;">
+                                </div>
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $Cdata -> name }}</h5>
                                     <p class="card-text">{{ $Cdata -> email }}</p>
