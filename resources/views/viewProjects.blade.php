@@ -1,7 +1,5 @@
 @extends('layout')
   @section('content')
-<!DOCTYPE html>
-<html lang="en">
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
@@ -14,12 +12,11 @@
       <div class="row">
         <div class="col-12">
           <h1>View Projects</h1>
-          <p>This is an example of a blank page that you can use as a starting point for creating new ones.</p>
            <div class="row">
           <?php
           foreach ($Cdata as $key) {
-           echo "<div class=\"col-sm-6\" style=\"margin-bottom:15px\">
-              <div class=\"card\" >
+           echo "<div class=\"col-sm-6\" style=\"margin-bottom:15px;\">
+              <div class=\"card bg-light\" style=\"border-top:4px solid #09918a;\">
                 <div class=\"card-body\">
                   <h5 class=\"card-title\">";
                   echo $key->name;
@@ -32,8 +29,6 @@
                   $enddate = date_create( $key->end_date );
                   $datediff = date_diff($Today,$enddate);
                   echo $datediff->format("%R%a days")." more";
-                  
-
                  
             echo"</p><div class=\"row\">
                   <form method=\"post\" action=\"createTasks\">
@@ -48,16 +43,11 @@
                     echo "\">View Project</button>
                   </form>";
              echo"</p>
-                  <form method=\"post\" action=\"viewAllTasks\">
-                    <button type=\"submit\" name=\"id\" class=\"btn btn-primary\"  style=\"margin-right:5px\" value=\"";
-                    echo $key->id;
-                    echo "\">View Tasks</button>
-                  </form></div>";
-                  
+                  </div>";
+
             echo "</div>
               </div>
             </div>";
-
           }
           ?>
           </div>
@@ -66,6 +56,5 @@
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
-    
-</html>
+  </div>
 @endsection
