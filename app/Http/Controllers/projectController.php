@@ -255,4 +255,35 @@ class projectController extends Controller
              return redirect ('/serverError');
          }
     }
+
+    public function viewProjectsToDelete(){
+        try{
+            $token = session('Cdata')->uid;
+            $company_id = session('Cdata')->user->company_id;
+            $client = new Client([
+                'headers' => ['Accept'=>'application/json',
+                    'Authorization'=>'Bearer '. $token
+                ]
+            ]);
+
+            $response = $client->request('POST','http://kinna.000webhostapp.com/api/v1/companyProjects',[
+                'form_params'=> [
+                    'company_id'=>$company_id,
+                ]
+            ]);
+
+            $data= $response->getBody();
+            $Cdata= json_decode($data);
+
+            //dd($Cdata) ;
+            return view('/Projects.deleteProjects',compact('Cdata'));
+
+        }catch(ClientException $ce){
+            return redirect ('/clientError');
+        }catch (ConnectException $c){
+            return redirect ('/connectionError');
+        }catch (ServerException $se){
+            return redirect ('/serverError');
+        }
+    }
 }
