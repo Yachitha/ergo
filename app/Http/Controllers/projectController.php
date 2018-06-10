@@ -85,7 +85,7 @@ class projectController extends Controller
             'headers' => ['Accept'=>'application/json','Authorization'=>'Bearer '.session('Cdata')->uid]
         ]);
 
-        $response = $client->request('POST','http://kinna.000webhostapp.com/api/v1/projectTeamMembers',[
+        $response = $client->request('POST','http://kinna.000webhostapp.com/api/v1/projectDetails',[
             'form_params'=> [
                 'project_id'=>$project_id,
                  ]
@@ -96,6 +96,28 @@ class projectController extends Controller
         
         //dd($Cdata);
         return view('/viewProjectOne',compact('Cdata')) ;
+    }
+
+    public function moreOnProject(Request $Request)
+    {
+
+        $project_id=$Request->input('id');
+        //dd($project_id);
+        $client = new Client([
+            'headers' => ['Accept'=>'application/json','Authorization'=>'Bearer '.session('Cdata')->uid]
+        ]);
+
+        $response = $client->request('POST','http://kinna.000webhostapp.com/api/v1/projectDetails',[
+            'form_params'=> [
+                'project_id'=>$project_id,
+                 ]
+        ]);
+
+        $data= $response->getBody();
+        $Cdata= json_decode($data);
+        
+        //dd($Cdata);
+        return view('Projects.viewProjectMore',compact('Cdata')) ;
     }
 
 //direct to project creation
@@ -277,6 +299,51 @@ class projectController extends Controller
 
             //dd($Cdata) ;
             return view('/Projects.deleteProjects',compact('Cdata'));
+
+        }catch(ClientException $ce){
+            return redirect ('/clientError');
+        }catch (ConnectException $c){
+            return redirect ('/connectionError');
+        }catch (ServerException $se){
+            return redirect ('/serverError');
+        }
+    }
+
+    public function ceoUpdateProject(Request $request)
+    {
+        try{
+            $token = session('Cdata')->uid;
+            $id = $request->input('project_id');
+            $name = $request->input ('name');
+            $description = $request->input ('description');
+            $feedback = $request->input ('feedback');
+            $end_date = $request->input ('end_date');
+            dd($end_date);
+            $client = new Client([
+                'headers' => ['Accept'=>'application/json',
+                    'Authorization'=>'Bearer '. $token
+                ]
+            ]);
+
+            $response = $client->request('POST','http://kinna.000webhostapp.com/api/v1/saveEditProject',[
+                'form_params'=> [
+                    'id'=>$id,
+                    'name'=>$name,
+                    'description'=>$description,
+                    'feedback'=>$feedback,
+                    'end_date'=>$end_date
+                ]
+            ]);
+
+            $data= $response->getBody();
+            $Cdata= json_decode($data);
+
+            //dd($Cdata) ;
+            if (!$Cdata->error) {
+                return redirect('viewProjects');
+                //return view('Projects.viewProjectMore',compact('Cdata'));
+            }
+            // return view('/Projects.deleteProjects',compact('Cdata'));
 
         }catch(ClientException $ce){
             return redirect ('/clientError');
