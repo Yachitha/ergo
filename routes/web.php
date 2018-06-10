@@ -130,3 +130,9 @@ Route::post ('/saveEditProject','ProjectController@saveEditProject')->middleware
 Route::post ('/extendDeadline','ProjectController@extendDeadline')->middleware(SessionCheck::class);
 
 Route::get('/deleteProjects','ProjectController@viewProjectsToDelete')->middleware(SessionCheck::class);
+
+Route::get('/viewUserProjects','ProjectController@viewUserProjects')->middleware(SessionCheck::class);
+
+Route::post('/moreOnProject','ProjectController@moreOnProject')->middleware(SessionCheck::class);
+
+Route::post('/ceoUpdateProject','ProjectController@ceoUpdateProject')->middleware(SessionCheck::class);
