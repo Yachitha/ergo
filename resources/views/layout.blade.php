@@ -161,7 +161,7 @@
             @endif
             @if(session ('Cdata')->user->role_id>=3)
             <li>
-                <a href="/viewProjects" class="nav-item">View My Projects</a> <!-- href link should be change -->
+                <a href="/viewUserProject" class="nav-item">View My Projects</a> <!-- href link should be change -->
             </li>
             @endif
            </ul>
@@ -486,6 +486,11 @@
           $("#extended_date").fadeIn();
           $("#continue_btn").fadeIn();
       });
+
+      function showDetails(id) {
+          $('#'+id).toggle();
+          $('#icon_'+id).toggleClass('fa-plus fa-minus');
+      }
   </script>
 </body>
 
